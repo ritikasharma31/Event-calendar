@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('clear').addEventListener('click', () => {
+  if (confirm("Are you sure you want to delete all events?")) {
+    localStorage.removeItem('events');
+    window.location.reload();
+  }
+});
+
   const calendar = document.querySelector('.calendar');
   const savedEvents = JSON.parse(localStorage.getItem('events')) || {};
 
