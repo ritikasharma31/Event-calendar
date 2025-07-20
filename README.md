@@ -1,8 +1,8 @@
-# 📅 Event Calendar
+#  Event Calendar
 
 An interactive and responsive Event Calendar built using HTML, CSS, and JavaScript. Easily add, view, delete, and search events with full local storage support. Supports recurring events (daily/weekly), color labels, time slots, and persistent data.
 
-## ✨ Features
+##  Features
 
 - Add events by clicking on a day
 - Set color and time for each event
@@ -17,7 +17,7 @@ An interactive and responsive Event Calendar built using HTML, CSS, and JavaScri
 
 
 
-## 🚀 How to Use
+##  How to Use
 
 1. Clone the repository  
    ```bash
@@ -26,18 +26,18 @@ An interactive and responsive Event Calendar built using HTML, CSS, and JavaScri
 2. Open index.html in your browser  
 No build step needed. Pure HTML/CSS/JS.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 - HTML
 - CSS
 - JavaScript (Vanilla)
 
-## 💡 Future Enhancements
+##  Future Enhancements
 - Drag-and-drop event reordering
 - Monthly/Weekly/Day view
 - Event categories or icons
 - User login for multi-user support
 
-## 📂 Folder Structure
+##  Folder Structure
 ```
 Event-calendar/
 │
@@ -47,15 +47,11 @@ Event-calendar/
 └── README.md
 ```
 
-## 👩‍💻 Author
+##  Author
 Ritika Sharma
 
-## 📃 License
-This project is licensed under the MIT License.
 
----
-
-### 📌 How to Add and Push the `README.md` to GitHub
+###  How to Add and Push the `README.md` to GitHub
 
 1. **Create the file**
 
