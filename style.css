@@ -1,52 +1,20 @@
-/* Dark Theme Calendar Styling */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
   background-color: #1e1e2f;
   color: #ffffff;
+  margin: 0;
+  padding: 20px;
 }
 
-header {
-  background-color: #29293d;
-  padding: 20px;
+h1 {
   text-align: center;
-  font-size: 2em;
-  color: #ffcc70;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: #00bcd4;
 }
 
 .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1px;
-  background-color: #444;
-  padding: 10px;
-}
-
-.day {
-  background-color: #2d2d44;
-  padding: 15px;
-  border-radius: 6px;
-  min-height: 100px;
-  position: relative;
-  transition: background 0.3s ease;
-}
-
-.day:hover {
-  background-color: #383858;
-  cursor: pointer;
-}
-
-.day-number {
-  font-weight: bold;
-  color: #ffcc70;
-}
-
-.event {
-  background-color: #ff6b6b;
-  padding: 4px 6px;
-  margin-top: 8px;
-  border-radius: 4px;
-  font-size: 0.85em;
-  color: #fff;
+  margin: 0 auto;
+  max-width: 900px;
+  background: #2a2a40;
+  padding: 20px;
+  border-radius: 10px;
 }
