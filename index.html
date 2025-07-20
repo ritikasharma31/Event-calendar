@@ -7,12 +7,35 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="header">
-    <h1>My Event Calendar</h1>
-    <input type="text" id="search" placeholder="Search events..." />
-<button id="themeToggle">🌗 Toggle Theme</button>
+  <div class="calendar-header">
+    <button id="prevMonth">←</button>
+    <h1 id="monthYear"></h1>
+    <button id="nextMonth">→</button>
   </div>
-  <div class="calendar"></div>
+
+  <!-- Weekday headers -->
+  <div class="weekdays">
+    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
+    <div>Thu</div><div>Fri</div><div>Sat</div>
+  </div>
+
+  <div class="calendar" id="calendar"></div>
+
+  <!-- Event modal -->
+  <div id="eventModal" class="modal">
+    <form id="eventForm">
+      <h2>Add/Edit Event</h2>
+      <label>Title: <input type="text" id="eventTitle" required /></label>
+      <label>Date: <input type="date" id="eventDate" required /></label>
+      <label>Time: <input type="time" id="eventTime" /></label>
+      <label>Description: <textarea id="eventDesc"></textarea></label>
+      <label>Color: <input type="color" id="eventColor" value="#3174ad" /></label>
+      <button type="submit">Save Event</button>
+      <button type="button" id="deleteEvent">Delete</button>
+      <button type="button" id="closeModal">Cancel</button>
+    </form>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

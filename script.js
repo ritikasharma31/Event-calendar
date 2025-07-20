@@ -1,91 +1,96 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const calendar = document.querySelector('.calendar');
-  const searchInput = document.getElementById('search');
-  const savedEvents = JSON.parse(localStorage.getItem('events')) || {};
+const calendar = document.getElementById("calendar");
+const monthYear = document.getElementById("monthYear");
+const modal = document.getElementById("eventModal");
+const form = document.getElementById("eventForm");
+const closeModal = document.getElementById("closeModal");
+const deleteBtn = document.getElementById("deleteEvent");
 
-  document.getElementById('clear').addEventListener('click', () => {
-    if (confirm("Are you sure you want to delete all events?")) {
-      localStorage.removeItem('events');
-      window.location.reload();
-    }
-  });
+let currentDate = new Date();
+let events = JSON.parse(localStorage.getItem("events")) || [];
+let editingEventId = null;
 
-  // Search Function
-  searchInput.addEventListener('input', () => {
-    const keyword = searchInput.value.toLowerCase();
-    document.querySelectorAll('.event').forEach(event => {
-      const match = event.innerText.toLowerCase().includes(keyword);
-      event.style.display = match ? 'block' : 'none';
-    });
-  });
+function renderCalendar() {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  calendar.innerHTML = "";
+  monthYear.textContent = currentDate.toLocaleString("default", { month: "long", year: "numeric" });
 
-  // Render 30-day calendar
-  for (let i = 1; i <= 30; i++) {
-    const dayDiv = document.createElement('div');
-    dayDiv.classList.add('day');
+  for (let i = 0; i < firstDay; i++) {
+    const emptyCell = document.createElement("div");
+    calendar.appendChild(emptyCell);
+  }
 
-    const dayNum = document.createElement('div');
-    dayNum.classList.add('day-number');
-    dayNum.innerText = i;
-    dayDiv.appendChild(dayNum);
-
-    // Render saved events
-    if (savedEvents[i]) {
-      savedEvents[i].forEach(eventName => {
-        const eventDiv = createEventDiv(i, eventName);
-        dayDiv.appendChild(eventDiv);
-      });
-    }
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(year, month, day).toISOString().split("T")[0];
+    const cell = document.createElement("div");
+    cell.className = "day";
+    cell.dataset.date = date;
+    cell.innerHTML = "<div class='date-number'>" + day + "</div>";
     
-
-    // Add new event
-    dayDiv.addEventListener('click', () => {
-      const eventName = prompt("Enter Event:");
-      if (!eventName) return;
-
-      const repeat = prompt("Should this event repeat? (none / daily / weekly)").toLowerCase();
-
-      if (repeat === 'daily') {
-        for (let d = 1; d <= 30; d++) {
-          addEventToDay(d, eventName);
-        }
-      } else if (repeat === 'weekly') {
-        for (let d = i; d <= 30; d += 7) {
-          addEventToDay(d, eventName);
-        }
-      } else {
-        addEventToDay(i, eventName);
-      }
-
-      localStorage.setItem('events', JSON.stringify(savedEvents));
-      window.location.reload();
+    const dayEvents = events.filter(e => e.date === date);
+    dayEvents.forEach(e => {
+      const evt = document.createElement("div");
+      evt.className = "event";
+      evt.textContent = e.title;
+      evt.style.background = e.color || "#3174ad";
+      cell.appendChild(evt);
     });
 
-    calendar.appendChild(dayDiv);
+    cell.onclick = () => openModal(date);
+    calendar.appendChild(cell);
   }
+}
 
-  // Utility to add event to a given day
-  function addEventToDay(day, name) {
-    if (!savedEvents[day]) savedEvents[day] = [];
-    if (!savedEvents[day].includes(name)) savedEvents[day].push(name);
+function openModal(date) {
+  modal.style.display = "flex";
+  form.reset();
+  editingEventId = null;
+  form["eventDate"].value = date;
+}
+
+closeModal.onclick = () => {
+  modal.style.display = "none";
+};
+
+form.onsubmit = (e) => {
+  e.preventDefault();
+  const eventData = {
+    id: editingEventId || Date.now(),
+    title: form["eventTitle"].value,
+    date: form["eventDate"].value,
+    time: form["eventTime"].value,
+    desc: form["eventDesc"].value,
+    color: form["eventColor"].value
+  };
+
+  if (editingEventId) {
+    events = events.map(e => e.id === editingEventId ? eventData : e);
+  } else {
+    events.push(eventData);
   }
+  localStorage.setItem("events", JSON.stringify(events));
+  modal.style.display = "none";
+  renderCalendar();
+};
 
-  // Create event DOM
-  function createEventDiv(day, name) {
-    const eventDiv = document.createElement('div');
-    eventDiv.classList.add('event');
-    eventDiv.innerText = name;
-
-    // Right-click to delete
-    eventDiv.addEventListener('contextmenu', (e) => {
-      e.preventDefault();
-      if (confirm("Delete this event?")) {
-        eventDiv.remove();
-        savedEvents[day] = savedEvents[day].filter(n => n !== name);
-        localStorage.setItem('events', JSON.stringify(savedEvents));
-      }
-    });
-
-    return eventDiv;
+deleteBtn.onclick = () => {
+  if (editingEventId) {
+    events = events.filter(e => e.id !== editingEventId);
+    localStorage.setItem("events", JSON.stringify(events));
+    modal.style.display = "none";
+    renderCalendar();
   }
-});
+};
+
+document.getElementById("prevMonth").onclick = () => {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+};
+document.getElementById("nextMonth").onclick = () => {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+};
+
+renderCalendar();
