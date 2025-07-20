@@ -7,6 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
   const calendar = document.querySelector('.calendar');
+  const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', () => {
+  const keyword = searchInput.value.toLowerCase();
+  document.querySelectorAll('.event').forEach(event => {
+    const match = event.innerText.toLowerCase().includes(keyword);
+    event.style.display = match ? 'block' : 'none';
+  });
+});
+
   const savedEvents = JSON.parse(localStorage.getItem('events')) || {};
 
   for (let i = 1; i <= 30; i++) {
