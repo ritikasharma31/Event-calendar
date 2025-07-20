@@ -13,9 +13,9 @@ An interactive and responsive Event Calendar built using HTML, CSS, and JavaScri
 - Data persistence using **localStorage**
 - Fully responsive modern UI (Dark Mode)
 
-## 📸 Screenshot
 
-![screenshot](screenshot.png) <!-- Add this file if you want -->
+
+
 
 ## 🚀 How to Use
 
