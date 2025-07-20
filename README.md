@@ -66,7 +66,7 @@ git add README.md
 3. **Commit the file**
 
 ```bash
-git commit -m "📝 Added README.md with project overview and usage guide"
+git commit -m " Added README.md with project overview and usage guide"
 ```
 
 4. **Push to GitHub**
