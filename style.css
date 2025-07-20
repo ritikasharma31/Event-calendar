@@ -63,3 +63,37 @@ button {
   border: 2px solid #4caf50;
   background-color: rgba(76, 175, 80, 0.1);
 }
+/* Responsive calendar layout for smaller devices */
+@media (max-width: 600px) {
+  .calendar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .day {
+    padding: 10px;
+    min-height: 100px;
+  }
+
+  .day-number {
+    font-size: 14px;
+  }
+
+  .event {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  header, .controls {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}
