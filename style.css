@@ -12,6 +12,13 @@ body {
   color: #fff;
   padding: 10px;
 }
+.calendar-header button {
+  background: #444;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
 .weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -19,14 +26,6 @@ body {
   text-align: center;
   font-weight: bold;
   padding: 10px 0;
-}
-
-.calendar-header button {
-  background: #444;
-  border: none;
-  color: white;
-  padding: 10px;
-  cursor: pointer;
 }
 .calendar {
   display: grid;
@@ -51,6 +50,7 @@ body {
   font-size: 12px;
   margin-top: 4px;
   border-radius: 4px;
+  cursor: move;
 }
 .modal {
   display: none;
@@ -68,6 +68,8 @@ body {
   display: flex;
   flex-direction: column;
 }
-.modal form input, .modal form textarea {
+.modal form input,
+.modal form textarea,
+.modal form select {
   margin-bottom: 10px;
 }
